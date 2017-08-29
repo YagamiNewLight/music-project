@@ -147,13 +147,17 @@ section.tabs .tab.active span{
 .tabsContent > .songlist > .layOut .coverAndIntro span {
     position: absolute;
     padding-left:15px;
-    top: 0px;;
+    top: 3px;;
     right: 5px;;
-    background:url(https://i.loli.net/2017/08/23/599d92f5243fa.png) no-repeat 0  ;
+    background:url(https://i.loli.net/2017/08/23/599d92f5243fa.png) no-repeat 0 0 ;
     font-size:13px;
     z-index:1;
     color:white;
     background-size: 15px 15px;
+    line-height:15px;
+}
+.tabsContent > .songlist > .layOut .coverAndIntro span {
+
 }
 .tabsContent .songs h2 {
     margin-top: 21px;
