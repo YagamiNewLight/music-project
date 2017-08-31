@@ -4,107 +4,88 @@
     <meta charset="UTF-8">
     <title>播放页面</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="./reset.css">
     <style>
         body{
-            height: 100vh;
-        }
-        .backgroundImg {
-            background-image: url(//i.loli.net/2017/08/29/59a5749b2d248.jpg);
-            background-size: cover;
+            width:100vw;
+         }
+        body::before{
+            z-index:-1;
+            position: absolute;
+            width:100%;
+            height:100%;
             display: block;
-            filter: blur(5px);
-            -webkit-filter: blur(5px);
-            height: 100vh;
-            left: 0;
-            position: fixed;
-            right: 0;
-            z-index: 1;
-        }
-        .content{
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            top: 0;
-            left: 0;
-            position: fixed;
-            right: 0;
-            z-index: 2;
-            height:100vh;
-            display: flex;
-            justify-content: center;
+            content:'';
+            background:transparent url(//i.loli.net/2017/08/31/59a775adbd3f9.jpg) center no-repeat;
+            background-size: cover;
+            filter: blur(40px);
         }
         .guanghuan{
-            background:url(//i.loli.net/2017/08/30/59a6a6efa1230.png) ;
-            background-size: cover;
-            height:300px;
-            width:300px;
-            z-index:4;
-            position: absolute;
             top:80px;
-            align-items: center;
+            width: 300px;
+            height:300px;
+            position: relative;
         }
-        .guanghuan.playing{
-            animation: spin infinite linear 8s;
+        .guanghuan::before{
+            position: absolute;
+            width:100%;
+            height:100%;
+            content:'';
+            background:url(https://i.loli.net/2017/08/31/59a77825f1f96.png) no-repeat;
+            background-size:cover;
+            z-index: 4;
+        }
+        .guanghuan.playing::before{
+            animation: spin 8s infinite linear;
         }
         .diezi{
-            height:300px;
-            width: 300px;
-            z-index:3;
-            position: absolute;
-            top:80px;
-            left:50%;
-            transform:translate(-50%);
-            background: url(//i.loli.net/2017/08/29/59a57c16e6efc.png) no-repeat;
-            background-size:cover;
+            width:100%;
+            height:100%;
             display: flex;
-            align-items: center;
             justify-content: center;
-        }
-        .innerPic{
-            height:200px;
-            width:200px;
-            z-index:3;
-            position: absolute;
-            border-radius: 50%;
-            background:url(//i.loli.net/2017/08/29/59a5749b2d248.jpg) no-repeat;
-            background-size:cover;
             align-items: center;
+        }
+        .diezi::before{
+            left:0;
+            right:0;
+            position: absolute;
+            width:100%;
+            height:100%;
+            content:'';
+            background:url(https://i.loli.net/2017/08/31/59a77941ec24a.png) no-repeat;
+            background-size:cover;
+        }
+        .diezi > .innerPic > img{
+            border-radius:50%;
+            width:200px;
+            height:200px;
         }
         .innerPic.playing{
-            animation: spin infinite linear 8s;
+            animation: spin 8s infinite linear;
         }
-        .pause{
-            height: 200px;
-            width: 200px;
-            z-index: 4;
+        .diezi > .pause {
             position: absolute;
-            top: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
-        .pause > img{
-            width:80px;
-            height: 80px;;
+        .diezi > .pause > img{
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            vertical-align: top;
         }
-        .pause.active{
+        .diezi > .pause.active {
             display: none;
         }
-        .play{
-            height: 300px;
-            width: 300px;;
-            z-index: 4;
+        .diezi > .play{
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
             position: absolute;
-            top: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
-        .play.active{
+        .diezi > .play > img {
+            vertical-align: top;
+        }
+        .diezi > .play.active {
             display: none;
-        }
-        .play > img{
-            width:80px;
-            height:80px;
         }
         @keyframes spin {
             form{
@@ -118,19 +99,20 @@
 
 </head>
 <body>
-<div class="backgroundImg"></div>
-<div class="content">
     <div class="guanghuan playing">
+        <div class="diezi">
+            <div class="innerPic playing">
+                <img  src="//i.loli.net/2017/08/31/59a775adbd3f9.jpg">
+            </div>
+            <div class="pause active">
+                <img src="//i.loli.net/2017/08/30/59a6be4466ded.png" alt=""  width="80" height="80">
+            </div>
+            <div class="play">
+                <img src="//i.loli.net/2017/08/30/59a6bf42757e3.png" alt="" width="80" height="80">
+            </div>
+        </div>
     </div>
-    <div class="diezi">
-        <div class="innerPic playing"></div>
-    </div>
-    <div class="pause active">
-        <img src="//i.loli.net/2017/08/30/59a6be4466ded.png" alt=""  width="80" height="80">
-    </div>
-    <div class="play">
-        <img src="//i.loli.net/2017/08/30/59a6bf42757e3.png" alt="" width="80" height="80">
-    </div>
+
 </div>
 </body>
 </html>
