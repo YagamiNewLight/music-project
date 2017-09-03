@@ -168,13 +168,18 @@ section.tabs .tab.active span{
 }
 .tabsContent .songs .newSongs{
     margin-top:24px;
+    text-align: center;
 }
-.tabsContent .songs .newSongs a {
+.theSong{
     display: block;
     position: relative;
     padding:8px 7px;
 }
-.tabsContent .songs .newSongs a p {
+.search > .theSong.active{
+    display: none;
+}
+.theSong  p{
+    text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -184,7 +189,7 @@ section.tabs .tab.active span{
     font-size:17px;
     margin-bottom:4px;
 }
-.tabsContent .songs .newSongs a small {
+.theSong small{
     display: flex;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -195,12 +200,13 @@ section.tabs .tab.active span{
     width: 90%;
     align-items:center;
 }
-.tabsContent .songs .newSongs a small > img {
+.theSong small > img {
     width:20px;
     height:20px;
     vertical-align: top;
+    margin-right:7px;
 }
-.tabsContent .songs .newSongs a > small + img {
+.theSong > small + img {
     position: absolute;
     top:50%;
     width:22px;
@@ -208,7 +214,7 @@ section.tabs .tab.active span{
     transform:translateY(-11px);
     right:5px;
 }
-.tabsContent .songs .newSongs a::after{
+.theSong a::after{
     top:0;
     left:0;
     content:'';
@@ -378,6 +384,9 @@ footer.download p{
     font-size:14px;
     border-radius:15px;
 }
+.search .searchResult.active{
+    display: none;
+}
 .search .searchResult p{
     position: relative;
     height:45px;
@@ -432,6 +441,10 @@ footer.download p{
     margin-top:10px;
     transform: scale(0.91) translateX(-18px);
 }
+
+.someSongs{
+    text-align: center;
+}
 .tabsContent .hotSongs > .someSongs > a{
     display: flex;
 }
@@ -442,6 +455,15 @@ footer.download p{
     text-align: center;
     padding: 0 10px;
     color:#999999;
+}
+.someSongs a:nth-child(1) span:nth-child(1){
+    color:#D43C33;
+}
+.someSongs a:nth-child(2) span:nth-child(1){
+    color:#D43C33;
+}
+.someSongs a:nth-child(3) span:nth-child(1){
+    color:#D43C33;
 }
 .tabsContent .hotSongs > .someSongs > a > span.hot{
     color:#D43C33;
@@ -460,6 +482,7 @@ footer.download p{
       width:80%;
       font-size:17px;
       margin-bottom:4px;
+     text-align: left;
 }
 .tabsContent .hotSongs > .someSongs > a > .songsWrapper small{
     display: flex;
@@ -473,8 +496,6 @@ footer.download p{
     align-items:center;
 }
 .tabsContent .hotSongs > .someSongs > a > .songsWrapper small > img{
-    width:20px;
-    height:20px;
     margin-right:4px;
 }
 .tabsContent .hotSongs > .someSongs > a > .songsWrapper small + img {

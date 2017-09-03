@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,11 +9,12 @@
         body{
             width:100vw;
          }
-        body::before{
+
+        .undergroundImg{
             z-index:-1;
             position: absolute;
-            width:100%;
-            height:100%;
+            width:100vw;
+            height:100vh;
             display: block;
             content:'';
             background:transparent url(//i.loli.net/2017/08/31/59a775adbd3f9.jpg) center no-repeat;
@@ -37,7 +38,11 @@
             z-index: 4;
         }
         .guanghuan.playing::before{
+            animation-play-state: running;
             animation: spin 8s infinite linear;
+        }
+        .guanghuan.pausing::before{
+            animation-play-state: paused;
         }
         .diezi{
             width:100%;
@@ -55,6 +60,7 @@
             content:'';
             background:url(https://i.loli.net/2017/08/31/59a77941ec24a.png) no-repeat;
             background-size:cover;
+            z-index:1;
         }
         .diezi > .innerPic > img{
             border-radius:50%;
@@ -62,21 +68,24 @@
             height:200px;
         }
         .innerPic.playing{
+            animation-play-state: running;
             animation: spin 8s infinite linear;
         }
+        .innerPic.pausing{
+            animation-play-state: paused;
+        }
         .diezi > .pause {
+            z-index: 9;
             position: absolute;
         }
         .diezi > .pause > img{
-            top:50%;
-            left:50%;
-            transform:translate(-50%,-50%);
             vertical-align: top;
         }
         .diezi > .pause.active {
             display: none;
         }
         .diezi > .play{
+            z-index: 9;
             top:50%;
             left:50%;
             transform:translate(-50%,-50%);
@@ -96,13 +105,33 @@
                 transform: rotateZ(360deg);
             }
         }
+        @media (min-width: 415px) {
+            .guanghuan {
+                width: 500px;
+                height: 500px;
+            }
+
+            .diezi > .innerPic > img {
+                width: 333.333333333px;
+                height:333.333333333px;
+            }
+            .diezi > .play > img{
+                width:133.333333333px;
+                height:133.333333333px;
+            }
+            .diezi > .pause > img{
+                width:133.333333333px;
+                height:133.333333333px;
+            }
+        }
     </style>
 
 </head>
 <body>
-    <div class="guanghuan playing">
+    <div class="undergroundImg"></div>
+    <div class="guanghuan">
         <div class="diezi">
-            <div class="innerPic playing">
+            <div class="innerPic">
                 <img  src="//i.loli.net/2017/08/31/59a775adbd3f9.jpg">
             </div>
             <div class="pause active">
@@ -113,7 +142,58 @@
             </div>
         </div>
     </div>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn1.lncld.net/static/js/3.1.0/av-min.js"></script>
+    <script>
+        var APP_ID = 'mILQIQweB355cMMwGy6EG0n0-gzGzoHsz';
+        var APP_KEY = '6BUMFbB1BVsphGS0CwCiYTDy';
+        AV.init({
+            appId: APP_ID,
+            appKey: APP_KEY
+        });
+        var audio = document.createElement('audio');
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+        var id = getParameterByName('id');
+        console.log(id);
+        var query = new AV.Query('song');
+        query.get(id).then(function (song) {
+            audio.src = song.attributes.url;
+            console.log(song.attributes.cover);
+            $('.undergroundImg').css("background-image",'url('+song.attributes.cover+')');
+            console.log( $('.diezi>.innerPic>img'))
+            $('.diezi>.innerPic>img').attr('src',song.attributes.cover);
+        })
 
+
+
+
+
+
+
+
+        $('.play').on('click',function(){
+            audio.play();
+            $('.play').addClass('active');
+            $('.pause').removeClass('active');
+            $('.guanghuan').addClass('playing').removeClass('pausing');
+            $('.innerPic').addClass('playing').removeClass('pausing')
+        })
+        $('.pause').on('click',function(){
+            audio.pause();
+            $('.pause').addClass('active');
+            $('.play').removeClass('active');
+            $('.guanghuan').addClass('pausing');
+            $('.innerPic').addClass('pausing');
+        })
+    </script>
 </div>
 </body>
 </html>
