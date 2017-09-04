@@ -10,10 +10,11 @@ section.topbar{
     justify-content: space-between;
     align-items: center;
     padding:17px 10px;
-    position: relative;
+    position: fixed;
     width:100%;
     z-index:3;
     top:0;
+    left:0;
 }
 section.topbar>svg{
     width:142px;
@@ -45,11 +46,12 @@ section.topbar > a::after{
 }
 section.tabs{
     display: flex;
-    position: relative;
+    position: fixed;
     left:0;
     width:100%;
     z-index:3;
     background-color: #fff;
+    top:64px;
 }
 section.tabs::after{
     top:0;
@@ -232,6 +234,7 @@ footer.download{
     padding-bottom:20px;
     background:url(//i.loli.net/2017/08/24/599e9fcdd9257.png) no-repeat 0 -60px;
     text-align: center;
+    background-size: cover;
 }
 footer.download a{
     margin-top:10px;
