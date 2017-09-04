@@ -38,10 +38,10 @@
             z-index: 4;
         }
         .guanghuan.playing::before{
-            animation-play-state: running;
             animation: spin 8s infinite linear;
         }
         .guanghuan.pausing::before{
+            -webkit-animation-play-state: paused;
             animation-play-state: paused;
         }
         .diezi{
@@ -68,14 +68,17 @@
             height:200px;
         }
         .innerPic.playing{
-            animation-play-state: running;
             animation: spin 8s infinite linear;
         }
         .innerPic.pausing{
+            -webkit-animation-play-state: paused;
             animation-play-state: paused;
         }
         .diezi > .pause {
             z-index: 9;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
             position: absolute;
         }
         .diezi > .pause > img{
@@ -171,11 +174,6 @@
             console.log( $('.diezi>.innerPic>img'))
             $('.diezi>.innerPic>img').attr('src',song.attributes.cover);
         })
-
-
-
-
-
 
 
 
