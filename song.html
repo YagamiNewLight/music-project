@@ -187,9 +187,17 @@
             audio.play();
             $('.play').addClass('active');
             $('.pause').removeClass('active');
-            $('.guanghuan').addClass('playing').removeClass('pausing');
-            $('.innerPic').addClass('playing').removeClass('pausing')
-        })
+            if($('.guanghuan').hasClass('playing')){}
+            else{
+            $('.guanghuan').addClass('playing')
+            }
+            $('.guanghuan') .removeClass('pausing');
+            if($('.innerPic').hasClass('playing')){}
+            else{
+                $('.innerPic').addClass('playing')
+            }
+            $('.innerPic').removeClass('pausing');
+        });
         $('.pause').on('click',function(){
             audio.pause();
             $('.pause').addClass('active');
