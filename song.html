@@ -41,8 +41,10 @@
             animation: spin 8s infinite linear;
         }
         .guanghuan.pausing::before{
-            -webkit-animation:none！important;
-            animation-play-state: paused;
+            -webkit-animation-play-state:paused;
+            -moz-animation-play-state:paused;
+            -o-animation-play-state:paused;
+            animation-play-state:paused;
         }
         .diezi{
             width:100%;
@@ -71,8 +73,12 @@
             animation: spin 8s infinite linear;
         }
         .innerPic.pausing{
-            -webkit-animation:none！important;
-            animation-play-state: paused;
+
+            -webkit-animation-play-state:paused;
+            -moz-animation-play-state:paused;
+            -o-animation-play-state:paused;
+            animation-play-state:paused;
+
 }
         .diezi > .pause {
             z-index: 9;
