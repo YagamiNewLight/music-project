@@ -142,23 +142,6 @@
     })
     var topbar = document.querySelector('.topbar')
     var tabs = document.querySelector('.tabs')
-    $(window).scroll(function(){
-        if(topbar.getBoundingClientRect().top<0){
-            var topbarPlaceholder = document.createElement('section');
-            topbarPlaceholder.classList.add('topbarPlaceholder');
-            topbar.style.position = 'fixed';
-            topbarPlaceholder.style.height  = topbar.getBoundingClientRect().height + 'px';
-            $(document.body).prepend(topbarPlaceholder);
-        }
-        if(tabs.getBoundingClientRect().top<0){
-            var tabsPlaceholder = document.createElement('section');
-            tabsPlaceholder.classList.add('placeholder');
-            tabsPlaceholder.style.height  = tabs.getBoundingClientRect().height + 'px';
-            $(tabs).before(tabsPlaceholder);
-            tabs.style.position = 'fixed';
-            tabs.style.top = (topbar.getBoundingClientRect().height) + 'px';
-        }
-    })
 </script>
 <script>
     var placeHolderImg = new Image();
