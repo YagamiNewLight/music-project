@@ -19,7 +19,7 @@
             content:'';
             background:transparent url(//i.loli.net/2017/08/31/59a775adbd3f9.jpg) center no-repeat;
             background-size: cover;
-            filter: blur(40px);
+            filter: blur(40px) brightness(0.4);
         }
         .guanghuan{
             margin:0 auto;
@@ -133,6 +133,40 @@
                 height:133.333333333px;
             }
         }
+        p{
+            text-align: center;}
+        .title{
+            font-family:Helvetica,sans-serif;
+            margin-top:100px;
+            text-align: center;
+        }
+        span{
+            color:#B3B29E;
+        }
+        .name{
+            color:white;
+        }
+        .lyricWrapper{
+            border:1px solid red;
+            height:100px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .lyric{
+            top:27px;
+            position: absolute;
+            height:27px;
+            border:1px solid blue;
+            font-size:17px;
+            line-height:31px;
+            overflow: visible;
+            width:100%;
+            color:#ccc;
+            transition: 0.2s linear;
+        }
+
     </style>
 
 </head>
@@ -151,6 +185,7 @@
             </div>
         </div>
     </div>
+    <div class="lyricWrapper"></div>
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="//cdn1.lncld.net/static/js/3.1.0/av-min.js"></script>
     <script>
@@ -171,18 +206,61 @@
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
         var id = getParameterByName('id');
-        console.log(id);
         var query = new AV.Query('song');
         query.get(id).then(function (song) {
             audio.src = song.attributes.url;
-            console.log(song.attributes.cover);
             $('.undergroundImg').css("background-image",'url('+song.attributes.cover+')');
-            console.log( $('.diezi>.innerPic>img'))
-            $('.diezi>.innerPic>img').attr('src',song.attributes.cover);
-        })
+            $('.diezi>.innerPic>img').attr('src',song.attributes.cover)
+            var p = document.createElement('p')
+            p.classList.add('title');
+            var span1 = document.createElement('span')
+            var span2 = document.createElement('span')
+            var lyric = document.createElement('div')
+            lyric.classList.add('lyric')
+            span1.classList.add('name');
+            span1.textContent = song.attributes.name + ' - ';
+            span2.textContent = song.attributes.singer;
+            $(p).append(span1).append(span2);
+            $(p).insertBefore('.lyricWrapper');
+            var regex = /^\[(.+)\](.*)$/
+            var array  = song.attributes.lyric.split('\n');
+            array = array.map(function(string,index){
+                var matches = string.match(regex);
+                if(matches){
+                    return {time:matches[1],words:matches[2]}
+                }
+            })
+            var $lyric = $(lyric);
+            array.map(function(object){
+                var $p = $('<p/>')
+                $p.attr('data-time',object.time).text(object.words);
+                $p.addClass('myData');
+                $p.appendTo($lyric);
+            })
+            $('.lyricWrapper').append($lyric);
+         })
+        function hmsToSeconds(hms){
+            var a = hms.split(':');
+            var seconds = (+a[0])* 60 + (+a[1]);
+            return seconds;
+        }
+        var n1 = 27;
+        Number.prototype.toFixed1=function (){
+            return parseFloat(this.toString().replace(/(\.\d{1})\d+$/,"$1"));
+        }
+        audio.ontimeupdate = function(){
+                var time = audio.currentTime;
+                console.log(time);
+                for(var i = 0;i<$('.myData').length;i++){
+                    var dataTime = $($('.myData')[i]).attr('data-time');
+                if(hmsToSeconds(dataTime).toFixed1() === time.toFixed1()){
+                    console.log('bingo');
+                        $('.lyric').css('top',n1);
+                        n1 -= 27;
+                }
+                }
 
-
-
+        }
         $('.play').on('click',function(){
             audio.play();
             $('.play').addClass('active');
