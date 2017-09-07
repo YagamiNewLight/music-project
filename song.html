@@ -5,170 +5,7 @@
     <title>播放页面</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="./reset.css">
-    <style>
-        body{
-            width:100vw;
-         }
-
-        .undergroundImg{
-            z-index:-1;
-            position: absolute;
-            width:100vw;
-            height:100vh;
-            display: block;
-            content:'';
-            background:transparent url(//i.loli.net/2017/08/31/59a775adbd3f9.jpg) center no-repeat;
-            background-size: cover;
-            filter: blur(40px) brightness(0.4);
-        }
-        .guanghuan{
-            margin:0 auto;
-            top:80px;
-            width: 300px;
-            height:300px;
-            position: relative;
-        }
-        .guanghuan::before{
-            position: absolute;
-            width:100%;
-            height:100%;
-            content:'';
-            background:url(https://i.loli.net/2017/08/31/59a77825f1f96.png) no-repeat;
-            background-size:cover;
-            z-index: 4;
-        }
-        .guanghuan.playing::before{
-            animation: spin 8s infinite linear;
-        }
-        .guanghuan.pausing::before{
-            -webkit-animation-play-state:paused;
-            -moz-animation-play-state:paused;
-            -o-animation-play-state:paused;
-            animation-play-state:paused;
-        }
-        .diezi{
-            width:100%;
-            height:100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .diezi::before{
-            left:0;
-            right:0;
-            position: absolute;
-            width:100%;
-            height:100%;
-            content:'';
-            background:url(https://i.loli.net/2017/08/31/59a77941ec24a.png) no-repeat;
-            background-size:cover;
-            z-index:1;
-        }
-        .diezi > .innerPic > img{
-            border-radius:50%;
-            width:200px;
-            height:200px;
-        }
-        .innerPic.playing{
-            animation: spin 8s infinite linear;
-        }
-        .innerPic.pausing{
-
-            -webkit-animation-play-state:paused;
-            -moz-animation-play-state:paused;
-            -o-animation-play-state:paused;
-            animation-play-state:paused;
-
-}
-        .diezi > .pause {
-            z-index: 9;
-            top:50%;
-            left:50%;
-            transform:translate(-50%,-50%);
-            position: absolute;
-        }
-        .diezi > .pause > img{
-            vertical-align: top;
-        }
-        .diezi > .pause.active {
-            display: none;
-        }
-        .diezi > .play{
-            z-index: 9;
-            top:50%;
-            left:50%;
-            transform:translate(-50%,-50%);
-            position: absolute;
-        }
-        .diezi > .play > img {
-            vertical-align: top;
-        }
-        .diezi > .play.active {
-            display: none;
-        }
-        @keyframes spin {
-            form{
-                transform: rotateZ(0deg);
-            }
-            to{
-                transform: rotateZ(360deg);
-            }
-        }
-        @media (min-width: 415px) {
-            .guanghuan {
-                width: 500px;
-                height: 500px;
-            }
-
-            .diezi > .innerPic > img {
-                width: 333.333333333px;
-                height:333.333333333px;
-            }
-            .diezi > .play > img{
-                width:133.333333333px;
-                height:133.333333333px;
-            }
-            .diezi > .pause > img{
-                width:133.333333333px;
-                height:133.333333333px;
-            }
-        }
-        p{
-            text-align: center;}
-        .title{
-            font-family:Helvetica,sans-serif;
-            margin-top:100px;
-            text-align: center;
-        }
-        span{
-            color:#B3B29E;
-        }
-        .name{
-            color:white;
-        }
-        .lyricWrapper{
-            border:1px solid red;
-            height:100px;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
-        .lyric{
-            top:27px;
-            position: absolute;
-            height:27px;
-            border:1px solid blue;
-            font-size:17px;
-            line-height:31px;
-            overflow: visible;
-            width:100%;
-            color:#ccc;
-            transition: 0.2s linear;
-        }
-
-    </style>
-
+    <link rel="stylesheet" href="song.css">
 </head>
 <body>
     <div class="undergroundImg"></div>
@@ -186,7 +23,11 @@
         </div>
     </div>
     <div class="lyricWrapper"></div>
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <footer>
+    <a href="#" class="open">打开</a>
+    <a href="#" class="download">下载</a>
+    </footer>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="//cdn1.lncld.net/static/js/3.1.0/av-min.js"></script>
     <script>
         var APP_ID = 'mILQIQweB355cMMwGy6EG0n0-gzGzoHsz';
@@ -207,15 +48,15 @@
         }
         var id = getParameterByName('id');
         var query = new AV.Query('song');
+        var span1 = document.createElement('span')
+        var span2 = document.createElement('span')
+        var lyric = document.createElement('div')
         query.get(id).then(function (song) {
             audio.src = song.attributes.url;
             $('.undergroundImg').css("background-image",'url('+song.attributes.cover+')');
             $('.diezi>.innerPic>img').attr('src',song.attributes.cover)
             var p = document.createElement('p')
             p.classList.add('title');
-            var span1 = document.createElement('span')
-            var span2 = document.createElement('span')
-            var lyric = document.createElement('div')
             lyric.classList.add('lyric')
             span1.classList.add('name');
             span1.textContent = song.attributes.name + ' - ';
@@ -245,23 +86,29 @@
             return seconds;
         }
         var n1 = 27;
-        Number.prototype.toFixed1=function (){
-            return parseFloat(this.toString().replace(/(\.\d{1})\d+$/,"$1"));
-        }
-        audio.ontimeupdate = function(){
+        Number.prototype.toFixed0=function (){
+            return parseFloat(this.toString().replace(/(\.\d{0})\d+$/,"$1"));
+        };
+        audio.onplaying = function(){
+            var height = -60;
+            window.intervalID = setInterval(function(){
                 var time = audio.currentTime;
-                console.log(time);
                 for(var i = 0;i<$('.myData').length;i++){
+                    var d =  $('.myData')[i].clientHeight;
                     var dataTime = $($('.myData')[i]).attr('data-time');
-                if(hmsToSeconds(dataTime).toFixed1() === time.toFixed1()){
-                    console.log('bingo');
-                        $('.lyric').css('top',n1);
-                        n1 -= 27;
+                    if(hmsToSeconds(dataTime).toFixed0() === time.toFixed0()){
+                        height += d;
+                        console.log('bingo')
+                        $('.lyric').css('top',-height);
+                    }
                 }
-                }
-
+            },1000);
+            return intervalID;
         }
-        $('.play').on('click',function(){
+        audio.onpause = function(){
+            clearInterval(intervalID);
+        }
+            $('.play').on('click',function(){
             audio.play();
             $('.play').addClass('active');
             $('.pause').removeClass('active');
