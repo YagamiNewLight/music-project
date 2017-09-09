@@ -130,21 +130,23 @@
 <script src="//cdn1.lncld.net/static/js/3.1.0/av-min.js"></script>
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 <script>
-    $('.tabs').on('click','.tab',function(e){
-        var index = $(e.currentTarget).index()
-        $(e.currentTarget).addClass('active').siblings().removeClass('active');
-        $($('.tabsContent').children()[index]).addClass('active').siblings().removeClass('active');
-    })
-    $('.clear').on('click',function(){
-        input.value = '';
-        $('.clear').removeClass('active');
-        $('.hotSearch').removeClass('active');
-        $('.keywordArea').removeClass('active');
-        $('.searchResult').remove();
-        $('.theSong').addClass('active');
-    })
-    var topbar = document.querySelector('.topbar')
-    var tabs = document.querySelector('.tabs')
+    !function () {
+        $('.tabs').on('click','.tab',function(e){
+            var index = $(e.currentTarget).index()
+            $(e.currentTarget).addClass('active').siblings().removeClass('active');
+            $($('.tabsContent').children()[index]).addClass('active').siblings().removeClass('active');
+        })
+        $('.clear').on('click',function(){
+            input.value = '';
+            $('.clear').removeClass('active');
+            $('.hotSearch').removeClass('active');
+            $('.keywordArea').removeClass('active');
+            $('.searchResult').remove();
+            $('.theSong').addClass('active');
+        })
+        var topbar = document.querySelector('.topbar')
+        var tabs = document.querySelector('.tabs')
+    }()
 </script>
 <script>
     var placeHolderImg = new Image();
@@ -274,7 +276,6 @@
                 a.href = 'song.html?'+'id='+results[i].id;
                 $('.newSongs').append(a);
             }else{
-                console.log(i);
                 var a = document.createElement('a');
                 a.href = 'song.html?'+'id='+results[i].id;
                 a.innerHTML = `
