@@ -31,25 +31,36 @@
         addSongInfoToPage();
         addListener();
         audio.onplaying = function(){
+            if($('.myData').length ===1){
+                $($('.myData')[0]).addClass('active');
+                $('.lyric').css('top',$('.myData')[0].clientHeight);
+            }
             window.intervalID = setInterval(function(){
                 var time = audio.currentTime;
-                for(var i = 0;i<$('.myData').length;i++){
-                    var d =  $('.myData')[i].clientHeight;
-                    var dataTime = $($('.myData')[i]).attr('data-time');
-                    if(hmsToSeconds(dataTime).toFixed0() === time.toFixed0()){
-                        $($('.myData')[i]).addClass('active');
-                        if($('.myData')[i-1]){
-                            $($('.myData')[i-1]).removeClass('active');
+                    for(var i = 0;i<$('.myData').length;i++){
+                        var d =  $('.myData')[i].clientHeight;
+                        var dataTime = $($('.myData')[i]).attr('data-time');
+                        if(hmsToSeconds(dataTime).toFixed0() === time.toFixed0()){
+                            $($('.myData')[i]).addClass('active');
+                            if($('.myData')[i-1]){
+                                $($('.myData')[i-1]).removeClass('active');
+                            }
+                            if(d){
+                            height += d;
+                            }
+                            $('.lyric').css('top',-height);
                         }
-                        height += d;
-                        $('.lyric').css('top',-height);
                     }
-                }
+
             },1000);
         }
         audio.onpause = function(){
             clearInterval(intervalID);
         }
+        audio.onended = function(){
+            toggle();
+            height = -60;
+        };
     }
     function addSongInfoToPage(){
         var query = new AV.Query('song');
@@ -68,24 +79,28 @@
         var array = regexParse(song);
         array.map(function(object){
             if(object){
-            var p = document.createElement('p');
-            p.setAttribute('data-time',object.time);
-            p.textContent = object.words;
-            p.classList.add('myData');
-            lyric.appendChild(p);
-            }
+                var p = document.createElement('p');
+                p.setAttribute('data-time',object.time);
+                p.textContent = object.words;
+                p.classList.add('myData');
+                lyric.appendChild(p);
+                }
         });
         $('.lyricWrapper').append($lyric);
     }
     function regexParse(song) {
         var regex = /^\[(.+)\](.*)$/;
         var array  = song.attributes.lyric.split('\n');
-        array = array.map(function(string,index){
-            var matches = string.match(regex);
-            if(matches){
-                return {time:matches[1],words:matches[2]}
-            }
-        });
+        if(array.length>3){
+            array = array.map(function(string){
+                var matches = string.match(regex);
+                if(matches){
+                    return {time:matches[1],words:matches[2]}
+                }
+            });
+        }else{
+            return [{time:null,words:array[0]}]
+        }
         return array
     }
 
@@ -109,7 +124,6 @@
         var seconds = (+a[0])* 60 + (+a[1]);
         return seconds;
     }
-    var n1 = 27;
     Number.prototype.toFixed0=function (){
         return parseFloat(this.toString().replace(/(\.\d{0})\d+$/,"$1"));
     };
@@ -122,6 +136,7 @@
         audio.play();
         $('.play').addClass('active');
         $('.pause').removeClass('active');
+        $('.needle').addClass('active');
         addPlayingClass($('.guanghuan'));
         addPlayingClass($('.innerPic'))
     }
@@ -136,6 +151,10 @@
 
     function pause(){
         audio.pause();
+        toggle();
+    }
+    function toggle(){
+        $('.needle').removeClass('active');
         $('.pause').addClass('active');
         $('.play').removeClass('active');
         $('.guanghuan').addClass('pausing');
