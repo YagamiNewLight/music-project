@@ -46,8 +46,8 @@ body{
     z-index: 4;
 }
 .guanghuan.playing::before{
-    -webkit-animation: spin 15s infinite linear running;
-    animation: spin 15s infinite linear running;
+    -webkit-animation: spin 15s infinite linear;
+    animation: spin 15s infinite linear;
 }
 .guanghuan.playing.pausing::before{
     -webkit-animation: spin 15s infinite linear paused;
@@ -77,12 +77,12 @@ body{
     height:200px;
 }
 .innerPic.playing{
-    -webkit-animation: spin 15s infinite linear running;
-            animation: spin 15s infinite linear running;
+    -webkit-animation: spin 15s infinite linear;
+            animation: spin 15s infinite linear;
 }
 .innerPic.playing.pausing{
     -webkit-animation: spin 15s infinite linear paused;
-    animation:spin 15s infinite linear paused;
+        animation:spin 15s infinite linear paused;
 }
 .diezi > .pause {
     z-index: 9;
@@ -133,6 +133,9 @@ body{
     .guanghuan {
         width: 500px;
         height: 500px;
+    }
+    .guanghuan::before{
+        z-index:5;
     }
     .diezi > .innerPic > img {
         width: 333.333333333px;
