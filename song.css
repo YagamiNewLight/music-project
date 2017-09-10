@@ -30,9 +30,13 @@ body{
 }
 .guanghuan.playing::before{
     animation: spin 8s infinite linear;
+    animation-play-state:running;
 }
 .guanghuan.pausing::before{
-
+    -webkit-animation-play-state:paused;
+    -moz-animation-play-state:paused;
+    -o-animation-play-state:paused;
+    animation-play-state:paused;
 }
 .diezi{
     width:100%;
@@ -59,8 +63,13 @@ body{
 }
 .innerPic.playing{
     animation: spin 8s infinite linear;
+    -webkit-animation-play-state:running;
 }
 .innerPic.pausing{
+    -webkit-animation-play-state:paused;
+    -moz-animation-play-state:paused;
+    -o-animation-play-state:paused;
+    animation-play-state:paused;
 
 }
 .diezi > .pause {
