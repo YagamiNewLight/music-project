@@ -32,10 +32,7 @@ body{
     animation: spin 8s infinite linear;
 }
 .guanghuan.pausing::before{
-    -webkit-animation-play-state:paused;
-    -moz-animation-play-state:paused;
-    -o-animation-play-state:paused;
-    animation-play-state:paused;
+
 }
 .diezi{
     width:100%;
@@ -64,11 +61,6 @@ body{
     animation: spin 8s infinite linear;
 }
 .innerPic.pausing{
-
-    -webkit-animation-play-state:paused;
-    -moz-animation-play-state:paused;
-    -o-animation-play-state:paused;
-    animation-play-state:paused;
 
 }
 .diezi > .pause {
