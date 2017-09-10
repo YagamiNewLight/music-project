@@ -5,6 +5,7 @@
     var audio = document.createElement('audio');
     var lyric = document.createElement('div');
     var $lyric = $(lyric);
+    var height = -60;
 //初始化AV
     function AVinit(){
         var APP_ID = 'mILQIQweB355cMMwGy6EG0n0-gzGzoHsz';
@@ -30,7 +31,6 @@
         addSongInfoToPage();
         addListener();
         audio.onplaying = function(){
-            var height = -60;
             window.intervalID = setInterval(function(){
                 var time = audio.currentTime;
                 for(var i = 0;i<$('.myData').length;i++){
@@ -122,18 +122,17 @@
         audio.play();
         $('.play').addClass('active');
         $('.pause').removeClass('active');
-        if($('.guanghuan').hasClass('playing')){}
-        else{
-            $('.guanghuan').addClass('playing')
-        }
-        $('.guanghuan') .removeClass('pausing');
-        if($('.innerPic').hasClass('playing')){}
-        else{
-            $('.innerPic').addClass('playing')
-        }
-        $('.innerPic').removeClass('pausing');
+        addPlayingClass($('.guanghuan'));
+        addPlayingClass($('.innerPic'))
     }
 
+    function addPlayingClass(element){
+        if(element.hasClass('playing')){}
+        else{
+            element.addClass('playing')
+        }
+        element .removeClass('pausing');
+    }
 
     function pause(){
         audio.pause();

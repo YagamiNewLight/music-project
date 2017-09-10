@@ -105,6 +105,14 @@ body{
         transform: rotateZ(360deg);
     }
 }
+@-webkit-keyframes spin {
+    form{
+        transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(360deg);
+    }
+}
 @media (min-width: 415px) {
     .guanghuan {
         width: 500px;
