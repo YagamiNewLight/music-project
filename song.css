@@ -110,14 +110,6 @@ body{
 .diezi > .play.active {
     display: none;
 }
-@keyframes spin {
-    from{
-        transform: rotateZ(0deg);
-    }
-    to{
-        transform: rotateZ(360deg);
-    }
-}
 @-webkit-keyframes spin {
     from{
         transform: rotateZ(0deg) scale(0.8);
@@ -126,6 +118,16 @@ body{
         transform: rotateZ(360deg) scale(0.8);
     }
 }
+
+@keyframes spin {
+    from{
+        transform: rotateZ(0deg) scale(0.8);
+    }
+    to{
+        transform: rotateZ(360deg) scale(0.8);
+    }
+}
+
 @media (min-width: 415px) {
     .needle img{
         width:120px;
