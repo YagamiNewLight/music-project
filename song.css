@@ -111,7 +111,7 @@ body{
     display: none;
 }
 @keyframes spin {
-    form{
+    from{
         transform: rotateZ(0deg);
     }
     to{
@@ -119,7 +119,7 @@ body{
     }
 }
 @-webkit-keyframes spin {
-    form{
+    from{
         transform: rotateZ(0deg) scale(0.8);
     }
     to{
