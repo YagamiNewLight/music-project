@@ -62,7 +62,15 @@
     function dynamicAddLyrics(song) {
         lyric.classList.add('lyric');
         var array = regexParse(song);
-        array.map(dynamicAddlyric);
+        array.map(function(object){
+            if(object){
+            var p = document.createElement('p');
+            p.setAttribute('data-time',object.time);
+            p.textContent = object.words;
+            p.classList.add('myData');
+            lyric.appendChild(p);
+            }
+        });
         $('.lyricWrapper').append($lyric);
     }
     function regexParse(song) {
@@ -76,12 +84,7 @@
         });
         return array
     }
-    function dynamicAddlyric(object){
-        var $p = $('<p/>');
-        $p.attr('data-time',object.time).text(object.words);
-        $p.addClass('myData');
-        $p.appendTo($lyric) ;
-    }
+
     function dynamicLoad(song){
         $('.undergroundImg').css("background-image",'url('+song.attributes.cover+')');
         $('.diezi>.innerPic>img').attr('src',song.attributes.cover)
