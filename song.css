@@ -49,7 +49,7 @@ body{
     -webkit-animation: spin 15s infinite linear running;
     animation: spin 15s infinite linear running;
 }
-.guanghuan.pausing::before{
+.guanghuan.playing.pausing::before{
     -webkit-animation: spin 15s infinite linear paused;
     animation: spin 15s infinite linear paused;
 }
@@ -80,7 +80,7 @@ body{
     -webkit-animation: spin 15s infinite linear running;
             animation: spin 15s infinite linear running;
 }
-.innerPic.pausing{
+.innerPic.playing.pausing{
     -webkit-animation: spin 15s infinite linear paused;
     animation:spin 15s infinite linear paused;
 }
@@ -127,11 +127,13 @@ body{
     }
 }
 @media (min-width: 415px) {
+    .needle img{
+        width:120px;
+    }
     .guanghuan {
         width: 500px;
         height: 500px;
     }
-
     .diezi > .innerPic > img {
         width: 333.333333333px;
         height:333.333333333px;
