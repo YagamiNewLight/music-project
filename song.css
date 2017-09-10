@@ -30,6 +30,7 @@ body{
 }
 .guanghuan.playing::before{
     animation: spin 8s infinite linear;
+    -webkit-animation-play-state:running;
     animation-play-state:running;
 }
 .guanghuan.pausing::before{
@@ -64,6 +65,7 @@ body{
 .innerPic.playing{
     animation: spin 8s infinite linear;
     -webkit-animation-play-state:running;
+    animation-play-state:running;
 }
 .innerPic.pausing{
     -webkit-animation-play-state:paused;
