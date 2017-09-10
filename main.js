@@ -37,6 +37,10 @@
                     var d =  $('.myData')[i].clientHeight;
                     var dataTime = $($('.myData')[i]).attr('data-time');
                     if(hmsToSeconds(dataTime).toFixed0() === time.toFixed0()){
+                        $($('.myData')[i]).addClass('active');
+                        if($('.myData')[i-1]){
+                            $($('.myData')[i-1]).removeClass('active');
+                        }
                         height += d;
                         $('.lyric').css('top',-height);
                     }

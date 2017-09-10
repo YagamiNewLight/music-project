@@ -14,7 +14,7 @@ body{
 }
 .guanghuan{
     margin:0 auto;
-    top:80px;
+    top:5vh;
     width: 300px;
     height:300px;
     position: relative;
@@ -129,7 +129,7 @@ p{
 }
 .title{
     font-family:Helvetica,sans-serif;
-    margin-top:100px;
+    margin-top:8vh;
     text-align: center;
 }
 span{
@@ -144,6 +144,7 @@ span{
     align-items: center;
     overflow: hidden;
     position: relative;
+    margin-top:4vh;
 }
 .lyric{
     top:60px;
@@ -154,17 +155,22 @@ span{
     overflow: visible;
     width:100%;
     color: rgb(100,100,100);
-    transition: 0.2s linear;
+    transition: 0.3s linear;
 }
-
+.myData.active{
+    color:white;
+}
 footer{
     text-align: center;
-    margin-top:75px;
+    position: absolute;
+    bottom:5vh;
+    left:0;
+    right:0;
 }
 footer a{
     margin-right: 10px;
     font-size: 18px;
-    padding: 10px 50px;
+    padding: 1vh 13vw;
     display: inline-block;
     border: 1px solid red;
     border-radius: 6px;
