@@ -138,7 +138,6 @@
         $('.pause').removeClass('active');
         $('.needle').addClass('active');
         addPlayingClass($('.guanghuan'));
-        addPlayingClass($('.innerPic'))
     }
 
     function addPlayingClass(element){
@@ -146,7 +145,6 @@
         else{
             element.addClass('playing')
         }
-        element .removeClass('pausing');
     }
 
     function pause(){
@@ -154,11 +152,23 @@
         toggle();
     }
     function toggle(){
+        var ghContainer = document.querySelector('.guanghuanImg');
+        var ghImg = ghContainer.querySelector('img');
+        var ipContainer = document.querySelector('.innerPic');
+        var ipImg = ipContainer.querySelector('img')
         $('.needle').removeClass('active');
         $('.pause').addClass('active');
         $('.play').removeClass('active');
-        $('.guanghuan').addClass('pausing');
-        $('.innerPic').addClass('pausing');
+        pausing(ghContainer,ghImg);
+        pausing(ipContainer,ipImg);
+        $('.guanghuan').removeClass('playing');
+    }
+    function pausing(container,image) {
+        var iTransform = getComputedStyle(image).transform;
+        var cTransform = getComputedStyle(container).transform;
+        container.style.transform = cTransform === 'none'
+            ? iTransform
+            : iTransform.concat(' ', cTransform);
     }
     main();
 }();
