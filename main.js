@@ -30,8 +30,7 @@
     function main(){
         addSongInfoToPage();
         addListener();
-        audio.oncanplay = function () {
-            audio.onplaying = function(){
+        audio.onplaying = function(){
                 if($('.myData').length ===1){
                     $($('.myData')[0]).addClass('active');
                     $('.lyric').css('top',$('.myData')[0].clientHeight);
@@ -55,7 +54,6 @@
 
                 },1000);
             }
-        }
         audio.onpause = function(){
             clearInterval(intervalID);
         }
@@ -135,7 +133,9 @@
     }
 
     function  play() {
-        audio.play();
+        audio.oncanplay = function() {
+            audio.play();
+        }
         $('.play').addClass('active');
         $('.pause').removeClass('active');
         $('.needle').addClass('active');
