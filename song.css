@@ -15,7 +15,7 @@ body{
 .needle img{
     transform: rotateZ(-26deg) translateY(-9%) translateX(35%);
     transition: transform 0.5s;
-    width:80px;
+    width:50px;
 }
 .undergroundImg{
     z-index:-1;
@@ -30,9 +30,9 @@ body{
 }
 .guanghuan{
     margin:0 auto;
-    top:9vh;
-    width: 240px;
-    height:240px;
+    top:6vh;
+    width: 200px;
+    height:200px;
     position: relative;
 }
 .guanghuan > .guanghuanImg{
@@ -68,8 +68,8 @@ body{
 }
 .diezi > .innerPic > img{
     border-radius:50%;
-    width:200px;
-    height:200px;
+    width:126px;
+    height:126px;
 }
 .guanghuan.playing > .diezi > .innerPic > img{
     -webkit-animation: spin 15s infinite linear;
@@ -121,7 +121,7 @@ body{
 
 @media (min-width: 415px) {
     .needle img{
-        width:120px;
+        width:110px;
     }
     .guanghuan {
         width: 500px;
@@ -148,7 +148,7 @@ p{
 }
 .title{
     font-family:Helvetica,sans-serif;
-    margin-top:15vh;
+    margin-top:10vh;
     text-align: center;
 }
 span{
@@ -163,7 +163,7 @@ span{
     align-items: center;
     overflow: hidden;
     position: relative;
-    margin-top:4vh;
+    margin-top:8vh;
 }
 .lyric{
     position: absolute;
