@@ -30,13 +30,14 @@
     function main(){
         addSongInfoToPage();
         addListener();
-        audio.onplaying = function(){
-            if($('.myData').length ===1){
-                $($('.myData')[0]).addClass('active');
-                $('.lyric').css('top',$('.myData')[0].clientHeight);
-            }
-            window.intervalID = setInterval(function(){
-                var time = audio.currentTime;
+        audio.oncanplay = function () {
+            audio.onplaying = function(){
+                if($('.myData').length ===1){
+                    $($('.myData')[0]).addClass('active');
+                    $('.lyric').css('top',$('.myData')[0].clientHeight);
+                }
+                window.intervalID = setInterval(function(){
+                    var time = audio.currentTime;
                     for(var i = 0;i<$('.myData').length;i++){
                         var d =  $('.myData')[i].clientHeight;
                         var dataTime = $($('.myData')[i]).attr('data-time');
@@ -46,13 +47,14 @@
                                 $($('.myData')[i-1]).removeClass('active');
                             }
                             if(d){
-                            height += d;
+                                height += d;
                             }
                             $('.lyric').css('top',-height);
                         }
                     }
 
-            },1000);
+                },1000);
+            }
         }
         audio.onpause = function(){
             clearInterval(intervalID);
