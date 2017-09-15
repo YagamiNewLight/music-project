@@ -29,7 +29,9 @@
 
     function main(){
         addSongInfoToPage();
-        addListener();
+        audio.oncanplay = function() {
+            addListener();
+        }
         audio.onplaying = function(){
                 if($('.myData').length ===1){
                     $($('.myData')[0]).addClass('active');
@@ -133,9 +135,7 @@
     }
 
     function  play() {
-        audio.oncanplay = function() {
-            audio.play();
-        }
+        audio.play();
         $('.play').addClass('active');
         $('.pause').removeClass('active');
         $('.needle').addClass('active');
