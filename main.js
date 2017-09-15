@@ -30,6 +30,7 @@
     function main(){
         addSongInfoToPage();
         audio.oncanplay = function() {
+            $('body').remove();
             addListener();
         };
         audio.onplaying = function(){
@@ -55,8 +56,6 @@
                 }
 
             },1000);
-        };
-        audio.onpause = function(){
         };
         audio.onended = function(){
             toggle();
