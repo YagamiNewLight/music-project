@@ -1,10 +1,10 @@
 {
   "name": "wangyiyunmusic",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist/* ; postcss --use autoprefixer --dir dist src/*.css;eslint src/*.js && babel main.js | uglifyjs > dist/main.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,5 +18,15 @@
     "eslint": "^4.6.1",
     "eslint-plugin-react": "^7.3.0",
     "postcss-cli": "^4.1.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YgamiLight/music-project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YgamiLight/music-project/issues"
+  },
+  "homepage": "https://github.com/YgamiLight/music-project#readme",
+  "keywords": [],
+  "description": ""
 }
