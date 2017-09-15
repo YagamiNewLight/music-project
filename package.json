@@ -13,6 +13,8 @@
     "simple-netease-cloud-music": "^0.1.8"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
     "eslint": "^4.6.1",
     "eslint-plugin-react": "^7.3.0",
     "postcss-cli": "^4.1.1"
