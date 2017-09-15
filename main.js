@@ -29,10 +29,7 @@
 
     function main(){
         addSongInfoToPage();
-        audio.oncanplaythrough = function() {
-            $('body').remove();
             addListener();
-        };
         audio.onplaying = function(){
             if($(".myData").length ===1){
                 $($(".myData")[0]).addClass("active");
