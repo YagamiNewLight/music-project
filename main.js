@@ -29,7 +29,7 @@
 
     function main(){
         addSongInfoToPage();
-        audio.oncanplay = function() {
+        audio.oncanplaythrough = function() {
             $('body').remove();
             addListener();
         };
