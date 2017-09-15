@@ -68,8 +68,8 @@ body{
 }
 .diezi > .innerPic > img{
     border-radius:50%;
-    width:126px;
-    height:126px;
+    width:130px;
+    height:130px;
 }
 .guanghuan.playing > .diezi > .innerPic > img{
     -webkit-animation: spin 15s infinite linear;
