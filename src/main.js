@@ -6,6 +6,7 @@
     var lyric = document.createElement("div");
     var $lyric = $(lyric);
     var height = -60;
+    a=2;
     //初始化AV
     function AVinit(){
         var APP_ID = "mILQIQweB355cMMwGy6EG0n0-gzGzoHsz";
@@ -45,20 +46,17 @@
                         if($(".myData")[i-1]){
                             $($(".myData")[i-1]).removeClass("active");
                         }
-                        console.log(d);
-                        if(!$($(".myData")[i]).hasClass("checked")){
+                        if(d){
                             height += d;
-                            $(".lyric").css("top",-height);
                         }
-                        $($(".myData")[i]).addClass("checked");
+                        $(".lyric").css("top",-height);
                     }
                 }
 
-            },300);
+            },1000);
         };
         audio.onended = function(){
             toggle();
-            $('p').removeClass('checked');
             height = -60;
         };
     }
@@ -120,11 +118,9 @@
         $(p).insertBefore(".lyricWrapper");
     }
     function hmsToSeconds(hms){
-        if(hms){
         var a = hms.split(":");
         var seconds = (+a[0])* 60 + (+a[1]);
         return seconds;
-        }
     }
     Number.prototype.toFixed0=function (){
         return parseFloat(this.toString().replace(/(\.\d{0})\d+$/,"$1"));
@@ -147,8 +143,8 @@
             element.addClass("playing");
         }
     }
+
     function pause(){
-        clearInterval(intervalID);
         audio.pause();
         toggle();
     }
