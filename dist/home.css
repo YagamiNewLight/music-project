@@ -62,7 +62,6 @@ section.tabs{
     z-index:3;
     background-color: #fff;
     top:60px;
-    outline:1px solid black;
 }
 section.tabs::after{
     top:0;
