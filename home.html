@@ -118,14 +118,14 @@
         </div>
         <div class="hotSearch">
             <h2>热门搜索</h2>
-            <span>Taylor Swift</span>
-            <span>你的名字</span>
-            <span>Pg One</span>
-            <span>尽头</span>
-            <span>Diss Gai</span>
-            <span>陈奕迅</span>
-            <span>林俊杰</span>
-            <span>市中心</span>
+            <span>Dead End</span>
+            <span>前前前世</span>
+            <span>For You</span>
+            <span>Candy</span>
+            <span>别话</span>
+            <span>当年情</span>
+            <span>怪你过分美丽</span>
+            <span>You Belong With Me</span>
         </div>
     </div>
 </section>
@@ -154,7 +154,7 @@
     var placeHolderImg = new Image();
     placeHolderImg.src = '//i.loli.net/2017/09/02/59aad16e9b515.gif';
     var placeHolderImg1 = new Image();
-    placeHolderImg1.src =  '//i.loli.net/2017/09/02/59aad16e9b515.gif';
+    placeHolderImg1.src = '//i.loli.net/2017/09/02/59aad16e9b515.gif';
     $('.newSongs').append(placeHolderImg1);
     $('.someSongs').append(placeHolderImg);
     var APP_ID = 'mILQIQweB355cMMwGy6EG0n0-gzGzoHsz';
@@ -166,67 +166,112 @@
     var $input = $('#search');
     var input = document.querySelector('#search');
     var flag = null;
-    $input.on('input',function(e){
+    var clock = null;
+    $input.on('input', function(e) {
         var text = this.value;
         var $keyword = $('.keyword');
         var $keywordArea = $('.keywordArea');
         var songObject = new AV.Query('song');
         $('.theSong').addClass('active');
-        if(this.value !== ''){
+        if (this.value !== '') {
             $('.clear').addClass('active');
             $('.hotSearch').addClass('active');
-        }else{
+        } else {
             $('.clear').removeClass('active');
             $('.hotSearch').removeClass('active');
         }
         $('.searchResult').remove();
-            $keywordArea.addClass('active');
-            if(text === ''){
-                $keywordArea.removeClass('active')
-            }
-            $keyword.text('搜索'+"'" + text +"'");
-            if(e.keyCode !== 13){
-            setTimeout(function(){
-                songObject.find().then(function(results){
-                    var theSong = document.querySelector('.search > .theSong');
-                    var searchResult = document.createElement('div')
-                    searchResult.classList.add('searchResult');
-                    for(var i = 0; i< results.length;i++){
-                        var name = results[i].attributes.name;
-                        if (( name.toUpperCase().indexOf(input.value.trim().toUpperCase()) !== -1 || name.toLowerCase().indexOf(input.value.trim().toLowerCase()) !== -1 ) && input.value.trim() !== '') {
-                            $('.searchResult').removeClass('active');
-                            var div = document.createElement('div');
-                            var p = document.createElement('p');
-                            var img = new Image();
-                            img.src = '//i.loli.net/2017/08/26/59a1306d02270.png';
-                            div.classList.add('songWrapper');
-                            $(p).text(name);
-                            $(div).prepend(img);
-                            $(div).append(p);
-                            flag = false;
-                            for(var j=0;j<$('.songWrapper').length;j++){
-                                if($('.songWrapper')[j].textContent === div.textContent){
-                                    flag = true;
+        $keywordArea.addClass('active');
+        if (text === '') {
+            $keywordArea.removeClass('active')
+        }
+        $keyword.text('搜索' + "'" + text + "'");
+        if (e.keyCode !== 13) {
+            if (clock) {
+                clearTimeout(clock);
+                clock = setTimeout(function() {
+                    songObject.find().then(function(results) {
+                        var theSong = document.querySelector('.search > .theSong');
+                        var searchResult = document.createElement('div')
+                        searchResult.classList.add('searchResult');
+                        for (var i = 0; i < results.length; i++) {
+                            var name = results[i].attributes.name;
+                            if ((name.toUpperCase().indexOf(input.value.trim().toUpperCase()) !== -1 || name.toLowerCase().indexOf(input.value.trim().toLowerCase()) !== -1) && input.value.trim() !== '') {
+                                $('.searchResult').removeClass('active');
+                                var links = document.createElement('a');
+                                var div = document.createElement('div');
+                                var p = document.createElement('p');
+                                var img = new Image();
+                                img.src = '//i.loli.net/2017/08/26/59a1306d02270.png';
+                                div.classList.add('songWrapper');
+                                $(p).text(name);
+                                $(div).prepend(img);
+                                $(div).append(p);
+                                $(links).append(div);
+                                links.href = 'song.html?' + 'id=' + results[i].id;
+                                flag = false;
+                                for (var j = 0; j < $('.songWrapper').length; j++) {
+                                    if ($('.songWrapper')[j].textContent === div.textContent) {
+                                        flag = true;
+                                    }
                                 }
-                            }
-                            if(flag === false){
-                                if(!theSong || $('.search >.theSong').hasClass('active') === true){
-                                    console.log(!theSong);
-                                    console.log($('.search >.theSong').hasClass('active'));
-                                searchResult.appendChild(div);
+                                if (flag === false) {
+                                    if (!theSong || $('.search >.theSong').hasClass('active') === true) {
+                                        searchResult.appendChild(links);
+                                    }
                                 }
                             }
                         }
-                    }
-                    if(searchResult.children.length !== 0){
-                        $('.search').append(searchResult);
-                    }
-                })
-            },1000);
+                        if (searchResult.children.length !== 0) {
+                            $('.search').append(searchResult);
+                        }
+                    })
+                }, 1000);
+            } else {
+                clock = setTimeout(function() {
+                    songObject.find().then(function(results) {
+                        var theSong = document.querySelector('.search > .theSong');
+                        var searchResult = document.createElement('div')
+                        searchResult.classList.add('searchResult');
+                        for (var i = 0; i < results.length; i++) {
+                            var name = results[i].attributes.name;
+                            if ((name.toUpperCase().indexOf(input.value.trim().toUpperCase()) !== -1 || name.toLowerCase().indexOf(input.value.trim().toLowerCase()) !== -1) && input.value.trim() !== '') {
+                                $('.searchResult').removeClass('active');
+                                var links = document.createElement('a');
+                                var div = document.createElement('div');
+                                var p = document.createElement('p');
+                                var img = new Image();
+                                img.src = '//i.loli.net/2017/08/26/59a1306d02270.png';
+                                div.classList.add('songWrapper');
+                                $(p).text(name);
+                                $(div).prepend(img);
+                                $(div).append(p);
+                                $(links).append(div);
+                                links.href = 'song.html?' + 'id=' + results[i].id;
+                                flag = false;
+                                for (var j = 0; j < $('.songWrapper').length; j++) {
+                                    if ($('.songWrapper')[j].textContent === div.textContent) {
+                                        flag = true;
+                                    }
+                                }
+                                if (flag === false) {
+                                    if (!theSong || $('.search >.theSong').hasClass('active') === true) {
+                                        searchResult.appendChild(links);
+                                    }
+                                }
+                            }
+                        }
+                        if (searchResult.children.length !== 0) {
+                            $('.search').append(searchResult);
+                        }
+                    })
+                }, 1000);
             }
-        });
-    $input.on('keyup',search);
-    function search(e){
+        }
+    });
+    $input.on('keyup', search);
+
+    function search(e) {
         if (e.keyCode === 13) {
             $input.blur();
             $('.hotSearch').addClass('active');
@@ -234,24 +279,24 @@
             songObject.find().then(function(results) {
                 for (var i = 0; i < results.length; i++) {
                     var name = results[i].attributes.name;
-                        if( ( name.toUpperCase().indexOf(input.value.trim().toUpperCase()) !== -1 || name.toLowerCase().indexOf(input.value.trim().toLowerCase()) !== -1 ) && input.value.trim() !== ''){
-                            var a = document.createElement('a');
-                            $(a).addClass('theSong');
-                            var p = document.createElement('p');
-                            var img1 = new Image();
-                            var img2 = new Image();
-                            var small = document.createElement('small');
-                            var auther = ' ' +results[i].attributes.singer;
-                            img1.src = '//i.loli.net/2017/08/29/59a558d215e45.png';
-                            img2.src = '//i.loli.net/2017/08/23/599d98d1958b2.png';
-                            $(p).text(results[i].attributes.name);
-                            $(small).prepend(img1).append(auther);
-                            $(a).prepend(p).append(small,img2);
-                            a.href = 'song.html?'+'id='+results[i].id;
-                            $('.search > .theSong').remove();
-                            $('.searchResult').remove();
-                            $('.search').append(a);
-                        }
+                    if ((name.toUpperCase().indexOf(input.value.trim().toUpperCase()) !== -1 || name.toLowerCase().indexOf(input.value.trim().toLowerCase()) !== -1) && input.value.trim() !== '') {
+                        var a = document.createElement('a');
+                        $(a).addClass('theSong');
+                        var p = document.createElement('p');
+                        var img1 = new Image();
+                        var img2 = new Image();
+                        var small = document.createElement('small');
+                        var auther = ' ' + results[i].attributes.singer;
+                        img1.src = '//i.loli.net/2017/08/29/59a558d215e45.png';
+                        img2.src = '//i.loli.net/2017/08/23/599d98d1958b2.png';
+                        $(p).text(results[i].attributes.name);
+                        $(small).prepend(img1).append(auther);
+                        $(a).prepend(p).append(small, img2);
+                        a.href = 'song.html?' + 'id=' + results[i].id;
+                        $('.search > .theSong').remove();
+                        $('.searchResult').remove();
+                        $('.search').append(a);
+                    }
                 }
             })
         }
@@ -262,24 +307,24 @@
         $(placeHolderImg1).remove();
         var n = 1;
         for (var i = 0; i < results.length; i++) {
-            if(results[i].attributes.newest === true){
+            if (results[i].attributes.newest === true) {
                 var a = document.createElement('a');
                 $(a).addClass('theSong');
                 var p = document.createElement('p');
                 var img1 = new Image();
                 var img2 = new Image();
                 var small = document.createElement('small');
-                var auther = ' ' +results[i].attributes.singer;
+                var auther = ' ' + results[i].attributes.singer;
                 img1.src = '//i.loli.net/2017/08/29/59a558d215e45.png';
                 img2.src = '//i.loli.net/2017/08/23/599d98d1958b2.png';
                 $(p).text(results[i].attributes.name);
                 $(small).prepend(img1).append(auther);
-                $(a).prepend(p).append(small,img2);
-                a.href = 'song.html?'+'id='+results[i].id;
+                $(a).prepend(p).append(small, img2);
+                a.href = 'song.html?' + 'id=' + results[i].id;
                 $('.newSongs').append(a);
-            }else{
+            } else {
                 var a = document.createElement('a');
-                a.href = 'song.html?'+'id='+results[i].id;
+                a.href = 'song.html?' + 'id=' + results[i].id;
                 a.innerHTML = `
                     <span>${0+''+n}</span>
                     <div class="songsWrapper">
@@ -292,8 +337,7 @@
                 n++;
             }
         }
-        });
-
+    });
 </script>
 </body>
 </html>
