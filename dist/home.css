@@ -61,7 +61,7 @@ section.tabs{
     width:100%;
     z-index:3;
     background-color: #fff;
-    top:60px;
+    top:64px;
 }
 section.tabs::after{
     top:0;
